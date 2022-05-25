@@ -21,11 +21,6 @@ public class UsersController {
         this.userService = userService;
     }
 
-    @GetMapping("/logout")
-    public String logout() {
-        return "redirect:/login";
-    }
-
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("users", userService.users());
