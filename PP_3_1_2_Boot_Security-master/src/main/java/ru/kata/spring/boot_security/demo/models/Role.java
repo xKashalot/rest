@@ -3,45 +3,33 @@ package ru.kata.spring.boot_security.demo.models;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.Collection;
 
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
-    private String username;
+    private String role;
 
-    @Transient
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<User> users;
+    @ManyToMany(mappedBy = "roles")
+    private Collection<User> users;
+
+
+    public Role(Long id, String role) {
+        this.id = id;
+        this.role = role;
+    }
+
+    public Role(Long id) {
+        this.id = id;
+    }
 
     public Role() {
-    }
 
-    public Role(Long id, String username) {
-        this.id = id;
-        this.username = username;
-    }
-
-    public String getName() {
-        return username;
-    }
-
-    public void setName(String username) {
-        this.username = username;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 
     public Long getId() {
@@ -52,8 +40,24 @@ public class Role implements GrantedAuthority {
         this.id = id;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Collection<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Collection<User> users) {
+        this.users = users;
+    }
+
     @Override
     public String getAuthority() {
-        return getName();
+        return getRole();
     }
 }

@@ -9,24 +9,24 @@
 <tr> id </tr>
 <p th:text="${user.getId()}" />
 <tr> name </tr>
-<p th:text="${user.getName()}" />
+<p th:text="${user.getUsername()}" />
 <tr> last name </tr>
 <p th:text="${user.getLastName()}" />
 <tr> city </tr>
 <p th:text="${user.getCity()}" />
 
-<form th:method="POST" th:action="@{/users/edit (id=${user.getId()})}" th:object="${user}">
+<form th:method="POST" th:action="@{/edit (id=${user.getId()})}" th:object="${user}">
     <input type="submit" value="Edit" />
 </form>
 
 <!--<form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">-->
-<form th:method="POST" th:action="@{/users/?id={id}(id=${user.getId()})}">
+<form th:method="POST" th:action="@{/?id={id}(id=${user.getId()})}">
     <input type="submit" value="Delete" />
 </form>
 
 <p>
 
-<form th:method="GET" th:action="@{/users}">
+<form th:method="GET" th:action="@{/}">
     <input type="submit" value="Back" />
 </form>
 

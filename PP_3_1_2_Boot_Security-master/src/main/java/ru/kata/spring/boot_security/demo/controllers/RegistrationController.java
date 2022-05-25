@@ -9,14 +9,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
 import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
 
+    private UserServiceImpl userService;
+
     @Autowired
-    private UserService userService;
+    public void setUserService(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -34,6 +39,10 @@ public class RegistrationController {
         if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
             model.addAttribute("passwordError", "Пароли не совпадают");
             return "registration";
+        }
+        if (!userService.save(userForm)){
+        model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+        return "registration";
         }
         return "redirect:/";
     }

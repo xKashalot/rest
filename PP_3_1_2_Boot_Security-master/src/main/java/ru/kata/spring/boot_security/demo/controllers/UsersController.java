@@ -11,7 +11,7 @@ import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
 @Controller
 @EnableWebMvc
-@RequestMapping("/users")
+@RequestMapping()
 public class UsersController {
 
     private final UserServiceImpl userService;
@@ -21,46 +21,58 @@ public class UsersController {
         this.userService = userService;
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "/login";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "redirect:/login";
+    }
+
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("users", userService.users());
-        return "users/index";
-    }
-
-    @GetMapping("/new")
-    public String newUser(@ModelAttribute("user") User user) {
-        return "users/new";
-    }
-
-    @PostMapping()
-    public String create(@ModelAttribute("user") User user) {
-        userService.save(user);
-        return "redirect:/users";
+        return "/index";
     }
 
     @PostMapping("/view")
     public String showById(@RequestParam("id") long id, Model model) {
         model.addAttribute("user", userService.showUser(id));
-        return "users/user";
+        return "/user";
     }
 
     @PostMapping("/update")
     public String update(@ModelAttribute("user") User user, @RequestParam("id") int id) {
         userService.update(id, user);
-        return "redirect:/users";
+        return "redirect:/";
     }
 
     @PostMapping("/")
     public String delete(@RequestParam("id") int id) {
         userService.delete(id);
-        return "redirect:/users";
+        return "redirect:/";
     }
 
     @PostMapping("/edit")
     public String edit(@RequestParam("id") int id, Model model){
     model.addAttribute("user", userService.showUser(id));
-    return "users/edit";
+    return "/edit";
     }
+
+
+//    @GetMapping("/new")
+//    public String newUser(@ModelAttribute("user") User user) {
+//        return "registration";
+//    }
+
+//    @PostMapping()
+//    public String create(@ModelAttribute("user") User user) {
+//        userService.save(user);
+//        return "redirect:/";
+//    }
+
 
 
 

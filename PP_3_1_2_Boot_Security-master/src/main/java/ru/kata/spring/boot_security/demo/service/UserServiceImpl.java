@@ -6,14 +6,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,14 +23,21 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    @Autowired
     UserRepository userRepository;
 
     @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     RoleRepository roleRepository;
+
+    @Autowired
+    public void setRoleRepository(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
+
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public User showUser(long id) {
@@ -40,15 +46,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void save(User user) {
-        user.setRoles(Collections.singleton(new Role(1l, "ROLE_USER")));
-        user.setPassword(user.getPassword());
-        userRepository.save(user);
+    public List<User> users() {
+        return userRepository.findAll();
     }
 
     @Override
-    public List<User> users() {
-        return userRepository.findAll();
+    public boolean save(User user) {
+        User userFromDB = userRepository.findByUsername(user.getUsername());
+
+        if (userFromDB != null) {
+            return false;
+        }
+
+        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return true;
     }
 
     @Override
@@ -62,7 +75,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     public void update(long id, User user) {
         User updatedUser = showUser(id);
-        updatedUser.setName(user.getName());
+        updatedUser.setUsername(user.getUsername());
         updatedUser.setLastName(user.getLastName());
         updatedUser.setCity(user.getCity());
     }
@@ -78,7 +91,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     private Collection<? extends GrantedAuthority> rolesToAuthorities(Collection<Role> roles){
-        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
+        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList());
     }
 
     //    @Override

@@ -12,16 +12,12 @@ import java.util.Set;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private long id;
+    private Long id;
 
-    @Column(name = "username")
     private String username;
 
-    @Column(name = "lastName")
     private String lastName;
 
-    @Column(name = "city")
     private String city;
 
     private String password;
@@ -30,40 +26,26 @@ public class User implements UserDetails {
     private String passwordConfirm;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles",
-                joinColumns = @JoinColumn(name = "user_id"),
-                inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private Collection<Role> roles;
 
 
     public User() {
     }
 
-    @Override
-    public String toString() {
-        return "User: " + " " + username + " " + lastName + " from " + city + " with id " + id;
-    }
-
-    public User(long id, String username, String lastName, String city) {
-        this.id = id;
-        this.username = username;
-        this.lastName = lastName;
-        this.city = city;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
+    @Override
+    public String getUsername() {
         return username;
     }
 
-    public void setName(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -91,11 +73,6 @@ public class User implements UserDetails {
     @Override
     public String getPassword() {
         return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
     }
 
     @Override
@@ -130,11 +107,16 @@ public class User implements UserDetails {
         this.passwordConfirm = passwordConfirm;
     }
 
-    public Set<Role> getRoles() {
+    public Collection<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "User: " + " " + username + " " + lastName + " from " + city + " with id " + id;
     }
 }
