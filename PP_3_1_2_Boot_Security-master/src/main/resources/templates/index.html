@@ -26,10 +26,10 @@
         <th th:utext="${user.getUsername()}" />
         <th th:utext="${user.getLastName()}" />
         <th th:utext="${user.getCity()}" />
-        <th> <form th:method="POST" th:action="@{/edit (id=${user.getId()})}" th:object="${user}">
+        <th> <form th:method="POST" th:action="@{/admin/edit (id=${user.getId()})}" th:object="${user}">
             <input type="submit" value="Edit" />
         </form></th>
-        <th> <form th:method="POST" th:action="@{/?id={id}(id=${user.getId()})}">
+        <th> <form th:method="POST" th:action="@{/admin/?id={id} (id=${user.getId()})}">
             <input type="submit" value="Pls no" />
         </form> </th>
         <th> <form th:method="POST" th:action="@{/view (id=${user.getId()})}">
@@ -39,10 +39,6 @@
 </table>
 
 <br/>
-
-<form th:method="GET" th:action="@{/registration}">
-    <input type="submit" value="Add new user" />
-</form>
 
 <form th:method="GET" th:action="@{/logout}">
     <input type="submit" value="Log out" />

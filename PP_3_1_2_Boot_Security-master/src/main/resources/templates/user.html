@@ -15,12 +15,12 @@
 <tr> city </tr>
 <p th:text="${user.getCity()}" />
 
-<form th:method="POST" th:action="@{/edit (id=${user.getId()})}" th:object="${user}">
+<form th:method="POST" th:action="@{/admin/edit (id=${user.getId()})}" th:object="${user}">
     <input type="submit" value="Edit" />
 </form>
 
 <!--<form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">-->
-<form th:method="POST" th:action="@{/?id={id}(id=${user.getId()})}">
+<form th:method="POST" th:action="@{/admin/?id={id}(id=${user.getId()})}">
     <input type="submit" value="Delete" />
 </form>
 

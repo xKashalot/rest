@@ -7,7 +7,7 @@
 
 <body>
 
-<form th:method="POST" th:action="@{/update (id=${user.getId()})}" th:object="${user}">
+<form th:method="POST" th:action="@{/admin/update (id=${user.getId()})}" th:object="${user}">
     <label for="username" > Enter name </label>
     <br/>
     <input type="text" th:field="*{username}" id="username" />
@@ -20,8 +20,17 @@
     <br/>
     <input type="text" th:field="*{city}" id="city" />
     <br/>
+    <label for="password"> Enter password </label>
+    <br/>
+    <input type="text" th:field="*{password}" id="password" />
+    <br/>
+
     <p/>
     <input type="submit" value="Update" />
+</form>
+
+<form th:method="GET" th:action="@{/}">
+    <input type="submit" value="Back" />
 </form>
 
 </body>

@@ -21,11 +21,6 @@ public class UsersController {
         this.userService = userService;
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "/login";
-    }
-
     @GetMapping("/logout")
     public String logout() {
         return "redirect:/login";
@@ -43,35 +38,24 @@ public class UsersController {
         return "/user";
     }
 
-    @PostMapping("/update")
+    @PostMapping("/admin/update")
     public String update(@ModelAttribute("user") User user, @RequestParam("id") int id) {
         userService.update(id, user);
         return "redirect:/";
     }
 
-    @PostMapping("/")
+    @PostMapping("/admin/")
     public String delete(@RequestParam("id") int id) {
         userService.delete(id);
         return "redirect:/";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/admin/edit")
     public String edit(@RequestParam("id") int id, Model model){
     model.addAttribute("user", userService.showUser(id));
     return "/edit";
     }
 
-
-//    @GetMapping("/new")
-//    public String newUser(@ModelAttribute("user") User user) {
-//        return "registration";
-//    }
-
-//    @PostMapping()
-//    public String create(@ModelAttribute("user") User user) {
-//        userService.save(user);
-//        return "redirect:/";
-//    }
 
 
 
