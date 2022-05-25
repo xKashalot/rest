@@ -7,12 +7,16 @@
 
 <body>
 
-<form th:method="POST" modelAttribute="userForm">
-    <input type="text"path="username" placeholder="name" />
+<form th:method="POST" th:action="@{/registration}" th:object="${userForm}">
+    <input type="text" th:field="*{username}" placeholder="username" />
     <br/>
-    <input type="password" path="password" placeholder="Password" />
+    <input type="text" th:field="*{lastname}" placeholder="lastname" />
     <br/>
-    <input type="password" path="passwordConfirm" placeholder="Password confirm" />
+    <input type="text" th:field="*{city}" placeholder="city" />
+    <br/>
+    <input type="password" th:field="*{password}" placeholder="Password" />
+    <br/>
+    <input type="password" th:field="*{passwordConfirm}" placeholder="Password confirm" />
     <br/>
     <p/>
     <button type="submit"> Registration </button>

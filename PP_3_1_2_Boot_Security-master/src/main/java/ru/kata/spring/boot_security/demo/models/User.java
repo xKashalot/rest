@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -16,7 +15,7 @@ public class User implements UserDetails {
 
     private String username;
 
-    private String lastName;
+    private String lastname;
 
     private String city;
 
@@ -49,12 +48,12 @@ public class User implements UserDetails {
         this.username = username;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getCity() {
@@ -117,6 +116,6 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return "User: " + " " + username + " " + lastName + " from " + city + " with id " + id;
+        return "User: " + " " + username + " " + lastname + " from " + city + " with id " + id;
     }
 }

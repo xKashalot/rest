@@ -32,7 +32,7 @@ public class UsersController {
         return "/index";
     }
 
-    @PostMapping("/view")
+    @PostMapping("/user/view")
     public String showById(@RequestParam("id") long id, Model model) {
         model.addAttribute("user", userService.showUser(id));
         return "/user";

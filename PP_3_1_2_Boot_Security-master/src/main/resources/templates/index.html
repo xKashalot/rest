@@ -24,7 +24,7 @@
     <tr th:each="user : ${users}">
         <th th:utext="${user.getId()}" />
         <th th:utext="${user.getUsername()}" />
-        <th th:utext="${user.getLastName()}" />
+        <th th:utext="${user.getLastname()}" />
         <th th:utext="${user.getCity()}" />
         <th> <form th:method="POST" th:action="@{/admin/edit (id=${user.getId()})}" th:object="${user}">
             <input type="submit" value="Edit" />
@@ -32,7 +32,7 @@
         <th> <form th:method="POST" th:action="@{/admin/?id={id} (id=${user.getId()})}">
             <input type="submit" value="Pls no" />
         </form> </th>
-        <th> <form th:method="POST" th:action="@{/view (id=${user.getId()})}">
+        <th> <form th:method="POST" th:action="@{/user/view (id=${user.getId()})}">
             <input type="submit" value="View" />
         </form> </th>
     </tr>
