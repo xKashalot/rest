@@ -83,7 +83,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User updatedUser = showUser(id);
         updatedUser.setUsername(user.getUsername());
         updatedUser.setLastname(user.getLastname());
-        updatedUser.setCity(user.getCity());
+        updatedUser.setEmail(user.getEmail());
+        updatedUser.setAge(user.getAge());
         updatedUser.setRoles(user.getRoles());
     }
 

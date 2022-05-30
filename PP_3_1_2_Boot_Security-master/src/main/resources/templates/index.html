@@ -15,7 +15,8 @@
         <th>Id</th>
         <th>Name</th>
         <th>Last Name</th>
-        <th>City</th>
+        <th>Age</th>
+        <th>Email</th>
         <th>Edit</th>
         <th>Delete</th>
         <th>Solo view</th>
@@ -25,7 +26,8 @@
         <th th:utext="${user.getId()}" />
         <th th:utext="${user.getUsername()}" />
         <th th:utext="${user.getLastname()}" />
-        <th th:utext="${user.getCity()}" />
+        <th th:utext="${user.getAge()}" />
+        <th th:utext="${user.getEmail()}" />
         <th> <form th:method="POST" th:action="@{/admin/edit (id=${user.getId()})}" th:object="${user}">
             <input type="submit" value="Edit" />
         </form></th>
