@@ -27,6 +27,18 @@ public class UsersController {
         return "/index";
     }
 
+    @GetMapping("/admin")
+    public String admin(Model model) {
+        model.addAttribute("users", userService.users());
+        return "/index";
+    }
+
+    @GetMapping("/user")
+    public String user(Model model) {
+        model.addAttribute("users", userService.users());
+        return "/index";
+    }
+
     @PostMapping("/user/view")
     public String showById(@RequestParam("id") long id, Model model) {
         model.addAttribute("user", userService.showUser(id));

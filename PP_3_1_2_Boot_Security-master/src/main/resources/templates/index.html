@@ -19,7 +19,6 @@
         <th>Email</th>
         <th>Edit</th>
         <th>Delete</th>
-        <th>Solo view</th>
     </tr>
 
     <tr th:each="user : ${users}">
@@ -33,9 +32,6 @@
         </form></th>
         <th> <form th:method="POST" th:action="@{/admin/?id={id} (id=${user.getId()})}">
             <input type="submit" value="Pls no" />
-        </form> </th>
-        <th> <form th:method="POST" th:action="@{/user/view (id=${user.getId()})}">
-            <input type="submit" value="View" />
         </form> </th>
     </tr>
 </table>
