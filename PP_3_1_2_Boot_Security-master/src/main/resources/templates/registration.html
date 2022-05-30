@@ -8,11 +8,13 @@
 <body>
 
 <form th:method="POST" th:action="@{/registration}" th:object="${userForm}">
+    <input type="text" th:field="*{email}" placeholder="email" />
+    <br/>
     <input type="text" th:field="*{username}" placeholder="username" />
     <br/>
     <input type="text" th:field="*{lastname}" placeholder="lastname" />
     <br/>
-    <input type="text" th:field="*{city}" placeholder="city" />
+    <input type="text" th:field="*{age}" placeholder="age" />
     <br/>
     <input type="password" th:field="*{password}" placeholder="Password" />
     <br/>

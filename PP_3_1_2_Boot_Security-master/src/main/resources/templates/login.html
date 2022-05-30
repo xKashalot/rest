@@ -21,7 +21,7 @@
 
         <div class="row d-flex justify-content-center">
             <div class="col-md-4">
-                <form class="text-center" th:action="@{/login}" method="post">
+                <form th:method="POST" th:action="@{/login}">
                     <div class="col mb-2">
                         <input type="email" class="form-control" name="email" placeholder="Email address"/>
                     </div>
@@ -29,7 +29,7 @@
                         <input type="password" class="form-control" name="password" placeholder="Password"/>
                     </div>
                     <div class="d-grid mb-2 gap-2 col mx-auto">
-                        <button type="button" class="btn btn-primary btn-lg btn-block">Sign in</button>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
                     </div>
                 </form>
             </div>
@@ -37,9 +37,9 @@
 
         <div class="row d-flex justify-content-center">
             <div class="col-md-4">
-                <form class="text-center" th:method="GET" th:action="@{/registration}">
+                <form  th:method="GET" th:action="@{/registration}">
                     <div class="d-grid gap-2 col mx-auto">
-                        <button type="button" class="btn btn-primary btn-block btn-lg">Registration</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">Registration</button>
                     </div>
                 </form>
             </div>
