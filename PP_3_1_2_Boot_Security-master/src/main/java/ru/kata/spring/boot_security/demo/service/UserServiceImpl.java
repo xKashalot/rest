@@ -84,6 +84,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         updatedUser.setUsername(user.getUsername());
         updatedUser.setLastname(user.getLastname());
         updatedUser.setCity(user.getCity());
+        updatedUser.setRoles(user.getRoles());
     }
 
     @Override
