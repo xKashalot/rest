@@ -29,8 +29,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
 
                 .authorizeRequests()
-                .antMatchers("/registration").permitAll()
-                .antMatchers("/", "/user/view").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/registration","/index","/").permitAll()
+                .antMatchers( "/user/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
@@ -38,8 +38,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(successUserHandler)
                 .permitAll()
                 .and()
-                .logout().logoutSuccessUrl("/logout")
-                .permitAll();
+                .logout()
+                .logoutUrl("/logout")
+                .permitAll()
+                .logoutSuccessUrl("/login");
     }
 
     @Bean
