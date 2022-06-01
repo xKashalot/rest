@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-      lang="ru" >
+      lang="ru">
 
 <head>
     <title>Login</title>
@@ -20,16 +20,16 @@
 </head>
 
 <body>
-
+<!-- Main -->
 <section class="position-relative ">
     <div class="container">
-
         <div class="row" style="margin-top: 50px">
             <div class="col-md-4 mb-8 mx-auto">
                 <h2> Please sign in </h2>
             </div>
         </div>
 
+        <!-- Inputs -->
         <div class="row d-flex justify-content-center">
             <div class="col-md-4">
                 <form th:method="POST" th:action="@{/login}">
@@ -50,6 +50,7 @@
             </div>
         </div>
 
+        <!-- Registration -->
         <div class="row d-flex justify-content-center">
             <div class="col-md-4">
                 <form th:method="GET" th:action="@{/registration}">
@@ -60,7 +61,7 @@
             </div>
         </div>
 
-
+        <!-- Errors -->
         <div th:if="${param.error}">
             <div class="row">
                 <div class="col-md-4 mb-8 mx-auto">
@@ -68,7 +69,6 @@
                 </div>
             </div>
         </div>
-
         <div th:if="${param.logout}">
             <div class="row">
                 <div class="col-md-4 mb-8 mx-auto">

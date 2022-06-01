@@ -16,10 +16,7 @@ import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.nio.file.attribute.UserPrincipalNotFoundException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -87,6 +84,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         updatedUser.setEmail(user.getEmail());
         updatedUser.setAge(user.getAge());
         updatedUser.setRoles(user.getRoles());
+    }
+
+    @Override
+    public Set<Role> getRoles() {
+        return new HashSet<>(roleRepository.findAll());
     }
 
     @Override

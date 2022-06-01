@@ -1,41 +1,81 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
     <meta charset="UTF-8">
-    <title>User</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title> Admin panel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
 <body>
+<!-- Top navigator -->
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+        <strong><span th:text="${user.email}"></span></strong> with roles:
+        <span th:each="role : ${user.username}" th:text="${role}"></span>
+    </a>
+    <a class="float-right text-secondary nav-link" href="/logout"><h5> Logout </h5></a>
+</nav>
+<!-- Main -->
+<div class="container-fluid d-flex flex-column">
+    <div class="row align-items-start">
+        <div class="row" style="padding-top: 10px">
 
-<table class="table" >
-<label> id </label>
-<p th:text="${user.getId()}" />
-<label> name </label>
-<p th:text="${user.getUsername()}" />
-<label> last name </label>
-<p th:text="${user.getLastname()}" />
-<label> city </label>
-<p th:text="${user.getCity()}" />
-</table>
+            <!--Left SideBar -->
+            <div class="col col-lg-2 bg-white">
+                <nav class="nav flex-column nav-pills">
+                    <a class="nav-link active" href="/user"> User </a>
+                </nav>
+            </div>
 
-<form th:method="POST" th:action="@{/admin/edit (id=${user.getId()})}" th:object="${user}">
-    <input type="submit" value="Edit" />
-</form>
-
-<!--<form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">-->
-<form th:method="POST" th:action="@{/admin/?id={id}(id=${user.getId()})}">
-    <input type="submit" value="Delete" />
-</form>
-
-<p>
-
-<form th:method="GET" th:action="@{/}">
-    <input type="submit" value="Back" />
-</form>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <!--User panel -->
+            <div class="col">
+                <h1 class="font-weight-bolder"> User information-page </h1>
+                <!--Table name -->
+                <div class="d-grid p-1 border bg-grey">
+                    <h5>About user</h5>
+                </div>
+                <!--Users table -->
+                <div class="d-grid gap-1">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Lastname</th>
+                            <th>Age</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+<!--                        <tr>-->
+<!--                            <th th:utext="${user.)}"></th>-->
+<!--                            <th th:utext="${user.getUsername()}"/>-->
+<!--                            <th th:utext="${user.getLastname()}"/>-->
+<!--                            <th th:utext="${user.getAge()}"/>-->
+<!--                            <th th:utext="${user.getEmail()}"/>-->
+<!--                            <th> <span th:each="role : ${user.roles}" th:text="${role.toString() + ' '}"/> </th>-->
+<!--                        </tr>-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>

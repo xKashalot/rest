@@ -2,47 +2,50 @@ package ru.kata.spring.boot_security.demo.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
+import ru.kata.spring.boot_security.demo.repository.UserRepository;
 import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
+
+import java.security.Principal;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 @EnableWebMvc
-@RequestMapping()
-public class UsersController {
+@RequestMapping("/admin")
+public class AdminController {
 
     private final UserServiceImpl userService;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UsersController(UserServiceImpl userService) {
+    public AdminController(UserServiceImpl userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("users", userService.users());
+    public String index(Model model, Principal user) {
+        List<User> users = userService.users();
+        Collection<Role> listRoles = userService.getRoles();
+        model.addAttribute("users", users);
+        model.addAttribute("roles", listRoles);
+        model.addAttribute("userRepo", userRepository.findByEmail(user.getName()));
         return "/index";
     }
 
-    @GetMapping("/admin")
-    public String admin(Model model) {
-        model.addAttribute("users", userService.users());
-        return "/index";
-    }
 
-    @GetMapping("/user")
-    public String user(Model model) {
-        model.addAttribute("users", userService.users());
-        return "/index";
-    }
-
-    @PostMapping("/user/view")
+    @PostMapping("/view")
     public String showById(@RequestParam("id") long id, Model model) {
         model.addAttribute("user", userService.showUser(id));
-        return "/user";
+        return "/";
     }
 
     @PostMapping("/admin/update")
@@ -57,17 +60,11 @@ public class UsersController {
         return "redirect:/";
     }
 
-    @PostMapping("/admin/edit")
-    public String edit(@RequestParam("id") int id, Model model){
-    model.addAttribute("user", userService.showUser(id));
-    return "/edit";
-    }
-
-
-
-
-
-
+//    @PostMapping("/admin/edit")
+//    public String edit(@RequestParam("id") int id, Model model){
+//    model.addAttribute("user", userService.showUser(id));
+//    return "/edit";
+//    }
 
 
 //        @GetMapping("/{id}")
