@@ -34,6 +34,13 @@ public class User implements UserDetails {
     public User() {
     }
 
+//    public User(String email, String password, Collection<? extends GrantedAuthority> rolesToAuthorities) {
+//        this.email = email;
+//        this.password = password;
+//        this.roles = (Set<Role>) rolesToAuthorities;
+//    }
+
+
     public Long getId() {
         return id;
     }

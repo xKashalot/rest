@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             return false;
         }
 
-        user.setRoles(Collections.singleton(roleRepository.getById(1L)));
+        user.setRoles(user.getRoles());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
@@ -97,14 +97,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("Not found");
         }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
-                                                                      rolesToAuthorities(user.getRoles()));
+        //return new User(user.getEmail(), user.getPassword(), rolesToAuthorities(user.getRoles()));
+        return user;
     }
 
 
-    private Collection<? extends GrantedAuthority> rolesToAuthorities(Collection<Role> roles){
-        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList());
-    }
+//    private Collection<? extends GrantedAuthority> rolesToAuthorities(Collection<Role> roles){
+//        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList());
+//    }
 
     //    @Override
 //    public User showUser(int id) {

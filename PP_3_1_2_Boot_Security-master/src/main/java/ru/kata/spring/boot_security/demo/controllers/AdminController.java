@@ -32,12 +32,13 @@ public class AdminController {
     }
 
     @GetMapping()
-    public String index(Model model, Principal user) {
+    public String index(Model model, @AuthenticationPrincipal User user) {
         List<User> users = userService.users();
         Collection<Role> listRoles = userService.getRoles();
         model.addAttribute("users", users);
         model.addAttribute("roles", listRoles);
-        model.addAttribute("userRepo", userRepository.findByEmail(user.getName()));
+        model.addAttribute("userRepo", userRepository.findByEmail(user.getEmail()));
+        model.addAttribute("newUser", new User());
         return "/index";
     }
 
@@ -48,23 +49,23 @@ public class AdminController {
         return "/";
     }
 
-    @PostMapping("/admin/update")
+    @PostMapping("/update")
     public String update(@ModelAttribute("user") User user, @RequestParam("id") int id) {
         userService.update(id, user);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
-    @PostMapping("/admin/")
+    @PostMapping("/")
     public String delete(@RequestParam("id") int id) {
         userService.delete(id);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
-//    @PostMapping("/admin/edit")
-//    public String edit(@RequestParam("id") int id, Model model){
-//    model.addAttribute("user", userService.showUser(id));
-//    return "/edit";
-//    }
+    @PostMapping("/edit")
+    public String edit(@RequestParam("id") int id, Model model){
+    model.addAttribute("user", userService.showUser(id));
+    return "/edit";
+    }
 
 
 //        @GetMapping("/{id}")

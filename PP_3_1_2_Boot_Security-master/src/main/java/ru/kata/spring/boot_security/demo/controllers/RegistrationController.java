@@ -44,4 +44,10 @@ public class RegistrationController {
         }
         return "redirect:/";
     }
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("userForm", new User());
+        return "login";
+    }
 }
