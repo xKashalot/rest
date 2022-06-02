@@ -15,18 +15,18 @@
 <!-- Top navigator -->
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
-        <strong><span th:text="${userRepo.email}"></span></strong> with roles:
-        <span th:each="role : ${userRepo.roles}" th:text="${role.toString()}"></span>
+        <strong><span th:text="${userRepo.email}" style="padding-left: 10px"></span></strong> with roles:
+        <span th:each="role : ${userRepo.roles}" th:text="${role.toString() + ' '}"></span>
     </a>
     <a class="float-right text-secondary nav-link" href="/logout"><h5> Logout </h5></a>
 </nav>
 <!-- Main -->
 <div class="container-fluid d-flex flex-column">
-    <div class="row align-items-start">
-        <div class="row" style="padding-top: 10px">
+    <div class="row align-items-start bg-light">
+        <div class="row" >
 
             <!--Left SideBar -->
-            <div class="col col-lg-2 bg-white">
+            <div class="col col-lg-2 bg-white" style="padding-top: 10px">
                 <nav class="nav flex-column nav-pills">
                     <a class="nav-link active" href="/admin"> Admin </a>
                     <a class="nav-link" href="/user"> User </a>
@@ -41,11 +41,11 @@
                     <a class="nav-item nav-link" href="#create" aria-selected="false">New user</a>
                 </div>
                 <!--Table name -->
-                <div class="d-grid p-1 border bg-grey">
-                    <h2>All users</h2>
+                <div class="d-grid p-1 border ">
+                    <h5>All users</h5>
                 </div>
                 <!--Users table -->
-                <div class="d-grid gap-1">
+                <div class="d-grid p-2 bg-white">
                     <table class="table table-striped">
                         <thead>
                         <tr>

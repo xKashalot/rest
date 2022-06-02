@@ -15,32 +15,33 @@
 <!-- Top navigator -->
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
-        <strong><span th:text="${user.email}"></span></strong> with roles:
-        <span th:each="role : ${user.roles}" th:text="${role.toString()}"></span>
+        <strong><span th:text="${user.email}" style="padding-left: 10px"></span></strong> with roles:
+        <span th:each="role : ${user.roles}" th:text="${role.toString() + ' '}"></span>
     </a>
     <a class="float-right text-secondary nav-link" href="/logout"><h5> Logout </h5></a>
 </nav>
 <!-- Main -->
-<div class="container-fluid d-flex flex-column">
-    <div class="row align-items-start">
-        <div class="row" style="padding-top: 10px">
+<div class="container-fluid d-flex flex-column ">
+    <div class="row align-items-start bg-light">
+        <div class="row">
 
             <!--Left SideBar -->
-            <div class="col col-lg-2 bg-white">
+            <div class="col col-lg-2 bg-white" style="padding-top: 10px">
                 <nav class="nav flex-column nav-pills">
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/admin">Admin</a>
                     <a class="nav-link active" href="/user"> User </a>
                 </nav>
             </div>
 
             <!--User panel -->
-            <div class="col">
+            <div class="col ">
                 <h1 class="font-weight-bolder"> User information-page </h1>
                 <!--Table name -->
-                <div class="d-grid p-1 border bg-grey">
+                <div class="d-grid p-1 border ">
                     <h5>About user</h5>
                 </div>
                 <!--Users table -->
-                <div class="d-grid gap-1">
+                <div class="d-grid p-2 bg-white">
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -53,14 +54,14 @@
                         </tr>
                         </thead>
                         <tbody>
-<!--                        <tr>-->
-<!--                            <th th:utext="${user.)}"></th>-->
-<!--                            <th th:utext="${user.getUsername()}"/>-->
-<!--                            <th th:utext="${user.getLastname()}"/>-->
-<!--                            <th th:utext="${user.getAge()}"/>-->
-<!--                            <th th:utext="${user.getEmail()}"/>-->
-<!--                            <th> <span th:each="role : ${user.roles}" th:text="${role.toString() + ' '}"/> </th>-->
-<!--                        </tr>-->
+                        <tr>
+                            <th th:utext="${user.getId()}"></th>
+                            <th th:utext="${user.getUsername()}"/>
+                            <th th:utext="${user.getLastname()}"/>
+                            <th th:utext="${user.getAge()}"/>
+                            <th th:utext="${user.getEmail()}"/>
+                            <th> <span th:each="role : ${user.roles}" th:text="${role.toString() + ' '}"/> </th>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
