@@ -56,10 +56,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public boolean save(User user) {
-        User userFromDB = userRepository.findByUsername(user.getUsername());
+        User userFromDB = userRepository.findByEmail(user.getEmail());
 
         if (userFromDB != null) {
             return false;
+        }
+
+        if (user.getRoles() == null) {
+            user.setRoles(Collections.singleton(roleRepository.getById(1L)));
         }
 
         user.setRoles(user.getRoles());

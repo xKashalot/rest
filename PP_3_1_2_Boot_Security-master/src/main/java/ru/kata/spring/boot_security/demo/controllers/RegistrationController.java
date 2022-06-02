@@ -42,12 +42,18 @@ public class RegistrationController {
         model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
         return "registration";
         }
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("userForm", new User());
         return "login";
+    }
+
+    @GetMapping("")
+    public String main(Model model) {
+        model.addAttribute("userForm", new User());
+        return "redirect:/login";
     }
 }
