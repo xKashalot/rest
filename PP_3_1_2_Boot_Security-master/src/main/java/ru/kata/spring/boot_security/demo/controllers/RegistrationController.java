@@ -51,6 +51,12 @@ public class RegistrationController {
         return "login";
     }
 
+    @GetMapping("/logout")
+    public String logout(Model model) {
+        model.addAttribute("userForm", new User());
+        return "login";
+    }
+
     @GetMapping("")
     public String main(Model model) {
         model.addAttribute("userForm", new User());

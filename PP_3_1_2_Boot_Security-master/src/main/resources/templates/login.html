@@ -15,8 +15,8 @@
 <!-- Main -->
 <section class="position-relative ">
     <div class="container">
-        <div class="row" style="margin-top: 50px">
-            <div class="col-md-4 mb-8 mx-auto">
+        <div class="row text-center" style="margin-top: 50px">
+            <div class="col-md-4 mb-8 mx-auto" >
                 <h2> Please sign in </h2>
             </div>
         </div>
@@ -25,12 +25,12 @@
         <div class="row d-flex justify-content-center">
             <div class="col-md-4">
                 <form th:method="POST" th:action="@{/login}">
-                    <div class="col mb-2">
+                    <div class="row mb-2">
                         <label>
                             <input type="email" class="form-control" name="email" placeholder="Email address"/>
                         </label>
                     </div>
-                    <div class="col mb-2">
+                    <div class="row mb-2">
                         <label>
                             <input type="password" class="form-control" name="password" placeholder="Password"/>
                         </label>
@@ -55,14 +55,14 @@
 
         <!-- Errors -->
         <div th:if="${param.error}">
-            <div class="row">
+            <div class="row text-center">
                 <div class="col-md-4 mb-8 mx-auto">
                     <h6> Invalid username or password. </h6>
                 </div>
             </div>
         </div>
         <div th:if="${param.logout}">
-            <div class="row">
+            <div class="row text-center">
                 <div class="col-md-4 mb-8 mx-auto">
                     <h6> You have been logged out. </h6>
                 </div>

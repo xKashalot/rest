@@ -12,10 +12,8 @@ import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
-import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @EnableWebMvc
@@ -61,11 +59,11 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/edit")
-    public String edit(@RequestParam("id") int id, Model model){
-    model.addAttribute("user", userService.showUser(id));
-    return "/edit";
-    }
+//    @PostMapping("/edit")
+//    public String edit(@RequestParam("id") int id, Model model){
+//    model.addAttribute("user", userService.showUser(id));
+//    return "create";
+//    }
 
 
 //        @GetMapping("/{id}")
