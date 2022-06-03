@@ -62,12 +62,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             return false;
         }
 
-        if (user.getRoles() == null) {
-            user.setRoles(Collections.singleton(roleRepository.getById(1L)));
-        }
-
         user.setRoles(user.getRoles());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
+        if (user.getRoles() == null) {
+            user.setRoles(Collections.singleton(roleRepository.getById(2L)));
+        }
         userRepository.save(user);
         return true;
     }
@@ -88,6 +88,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         updatedUser.setEmail(user.getEmail());
         updatedUser.setAge(user.getAge());
         updatedUser.setRoles(user.getRoles());
+        updatedUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        updatedUser.setPasswordConfirm(bCryptPasswordEncoder.encode(user.getPasswordConfirm()));
     }
 
     @Override
