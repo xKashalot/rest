@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
@@ -43,28 +44,5 @@ public class RegistrationController {
         return "registration";
         }
         return "redirect:/admin";
-    }
-
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("userForm", new User());
-        return "login";
-    }
-
-    @GetMapping("/success")
-    public String success() {
-        return "success";
-    }
-
-    @GetMapping("/logout")
-    public String logout(Model model) {
-        model.addAttribute("userForm", new User());
-        return "login";
-    }
-
-    @GetMapping("")
-    public String main(Model model) {
-        model.addAttribute("userForm", new User());
-        return "redirect:/login";
     }
 }

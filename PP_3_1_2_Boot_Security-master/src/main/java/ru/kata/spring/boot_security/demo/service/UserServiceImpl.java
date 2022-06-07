@@ -103,34 +103,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("Not found");
         }
-        //return new User(user.getEmail(), user.getPassword(), rolesToAuthorities(user.getRoles()));
         return user;
     }
 
-
-//    private Collection<? extends GrantedAuthority> rolesToAuthorities(Collection<Role> roles){
-//        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList());
-//    }
-
-    //    @Override
-//    public User showUser(int id) {
-//       return (User) entityManager.createQuery("from User where id = :id").setParameter("id", id).getSingleResult();
-//    }
-//
-//    @Override
-//    @Transactional
-//    public void save(User user) {
-//        entityManager.persist(user);
-//    }
-//
-//    @Override
-//    @SuppressWarnings("unchecked")
-//    public List<User> users() {
-//        return entityManager.createQuery("from User").getResultList();
-//    }
-//
-//    @Transactional
-//    public void delete(int id) {
-//        entityManager.createQuery("delete from User where id = :id").setParameter("id", id).executeUpdate();
-//    }
 }

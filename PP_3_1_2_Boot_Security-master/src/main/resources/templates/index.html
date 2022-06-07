@@ -155,7 +155,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="#" th:method="POST" th:action="@{/admin/update (id=${user.getId()})}"
+                                    <form th:method="PATCH" th:action="@{/admin/users/update/{id} (id=${user.getId()})}"
                                           th:object="${user}">
                                         <div class="form-group p-2 text-center">
                                             <label for="editID"> <span class="fw-bold">ID </span> </label>
@@ -209,7 +209,7 @@
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close
                                             </button>
-                                            <button type="submit" class="btn btn-primary">Edit</button>
+                                            <button type="submit" class="btn btn-primary" value="update">Edit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -229,7 +229,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="#" th:method="POST" th:action="@{/admin/delete (id=${user.getId()})}"
+                                    <form th:method="DELETE" th:action="@{/admin/users/{id} (id=${user.getId()})}"
                                           th:object="${user}">
                                         <div class="form-group p-2 text-center">
                                             <label for="delID"> <span class="fw-bold">ID </span> </label>
