@@ -48,14 +48,12 @@ public class MainController {
 
 
     @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("userForm", new User());
+    public String login() {
         return "login";
     }
 
     @GetMapping("/logout")
-    public String logout(Model model) {
-        model.addAttribute("userForm", new User());
+    public String logout() {
         return "login";
     }
 
