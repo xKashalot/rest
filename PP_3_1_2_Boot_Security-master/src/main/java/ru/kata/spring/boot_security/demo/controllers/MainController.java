@@ -59,10 +59,4 @@ public class MainController {
         return "login";
     }
 
-//    @GetMapping("")
-//    public String main(Model model) {
-//        model.addAttribute("userForm", new User());
-//        return "redirect:/login";
-//    }
-
 }
