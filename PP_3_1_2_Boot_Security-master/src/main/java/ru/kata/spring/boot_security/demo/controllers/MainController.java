@@ -39,7 +39,6 @@ public class MainController {
         return "/index";
     }
 
-
     @GetMapping("admin/users/{id}")
     public String showById(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.showUser(id));
