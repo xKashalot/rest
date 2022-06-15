@@ -3,28 +3,47 @@ let requestUrl = 'http://localhost:8080/admin/users'
 // Users table
 // refreshData() -обновить таблицу без перезагрузки
 function refreshData() {
+    fetch(requestUrl)
+        .then(response => response.json())
+        .then(result => refreshTable(result))
 
-    function refreshTable(users) {
+        function refreshTable(){
+            //chtoto bydet
+        }
 
-    }
 
 }
 
 
 // Create new user
-function createUser(){
+function createUser(user){
+    fetch(requestUrl)
+        .then() //
 
-    refreshData()
 }
 
 
 // Edit modal
 function editModal(id) {
-    function editUser(id){
-
+    fetch(requestUrl + id)
+        .then(response => response.json())
+        .then(result => userFields(result))
+    function userFields(user) {
+        $('#editID').val(user.id);
+        $('#editName').val(user.username);
+        $('#editLastname').val(user.lastname);
+        $('#editAge').val(user.age);
+        $('#editEmail').val(user.email);
+        $('#editPassword').val(user.password);
+        $('#editPasswordConfirm').val(user.passwordConfirm);
+        
     }
+}
+function editUser(id){
+
     refreshData()
 }
+
 
 
 // Delete modal
@@ -34,7 +53,8 @@ function deleteModal(id) {
 
     }
 
+    refreshData()
 }
-refreshData()
+
 
 
