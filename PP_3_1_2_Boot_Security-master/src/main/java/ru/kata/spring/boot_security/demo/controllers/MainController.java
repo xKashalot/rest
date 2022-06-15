@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.List;
 
 @Controller
-@EnableWebMvc
 public class MainController {
 
     private final UserServiceImpl userService;
