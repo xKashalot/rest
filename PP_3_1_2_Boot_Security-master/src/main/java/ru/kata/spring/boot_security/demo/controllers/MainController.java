@@ -50,6 +50,7 @@ public class MainController {
         return "login";
     }
 
+
     @GetMapping("/logout")
     public String logout() {
         return "login";

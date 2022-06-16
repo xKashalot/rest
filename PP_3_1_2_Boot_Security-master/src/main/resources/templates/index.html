@@ -52,37 +52,18 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Lastname</th>
-                                    <th>Age</th>
-                                    <th>Email</th>
-                                    <th>Roles</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Lastname</th>
+                                    <th scope="col">Age</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Roles</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr class="table-active" th:each="user : ${users}">
-                                    <th th:utext="${user.getId()}"/>
-                                    <th th:utext="${user.getUsername()}"/>
-                                    <th th:utext="${user.getLastname()}"/>
-                                    <th th:utext="${user.getAge()}"/>
-                                    <th th:utext="${user.getEmail()}"/>
-                                    <th><span th:each="role : ${user.roles}" th:text="${role.toString() + ' '}"/></th>
-                                    <td>
-                                        <button type="button" class="btn btn-info text-white" data-toggle="modal"
-                                                th:attr="data-target='#editModal'"> Edit
-<!--                                                th:attr="data-target=${'#editModal'+user.id}">Edit-->
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                th:attr="data-target='#deleteModal'"> Delete
-<!--                                                th:attr="data-target=${'#deleteModal'+user.id}">Delete-->
-                                        </button>
-                                    </td>
-                                </tr>
+                                <tbody id="usersTable">
+                                <!-- Users table js -->
                                 </tbody>
                             </table>
                         </div>
@@ -248,16 +229,13 @@
                                                 <label for="delRoles"> <span class="fw-bold"> Role </span></label>
                                                 <select multiple class="form-select" id="delRoles" size="2">
                                                     <option value="1">ADMIN</option>
-                                                    <option value="2" selected>USER</option>
+                                                    <option value="2">USER</option>
                                                 </select>
                                             </div>
                                         </fieldset>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close
-                                            </button>
-                                            <button type="submit" class="btn btn-danger" onclick="user.delete()">
-                                                Delete
-                                            </button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger" onclick="" id="delete">Delete</button>
                                         </div>
                                     </form>
                                 </div>
@@ -279,7 +257,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
         integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
         crossorigin="anonymous"></script>
-<script type="text/javascript" th:src="@{/static/js/main.js}" ></script>
+<script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
 
 </body>
 </html>
