@@ -41,30 +41,50 @@ refreshData();
 // }
 
 
-// // Edit modal
-// function editModal(id) {
-//     fetch(requestUrl + id)
-//         .then(response => response.json())
-//         .then(result => userFields(result))
-//
-//     function userFields(user) {
-//         $('#editID').val(user.id);
-//         $('#editName').val(user.username);
-//         $('#editLastname').val(user.lastname);
-//         $('#editAge').val(user.age);
-//         $('#editEmail').val(user.email);
-//         $('#editPassword').val(user.password);
-//         $('#editPasswordConfirm').val(user.passwordConfirm);
-//     }
-//
-//     //refreshData()
-// }
-//
-// function editUser(id) {
-//
-//     refreshData()
-// }
+// Edit modal
+function editModal(id) {
+    fetch(requestUrl + '/' + id)
+        .then(response => response.json())
+        .then(result => userFields(result))
 
+    function userFields(user) {
+        $('#editID').val(user.id);
+        $('#editName').val(user.username);
+        $('#editLastname').val(user.lastname);
+        $('#editAge').val(user.age);
+        $('#editEmail').val(user.email);
+        $('#editPassword').val(user.password);
+        $('#editPasswordConfirm').val(user.passwordConfirm);
+        $('#edit').attr('onclick', 'editUser(' + user.id + ')')
+        $('#editModal').modal()
+    }
+}
+
+function editUser(id) {
+    fetch(requestUrl + '/' + id,
+        {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'PUT',
+            body: JSON.stringify(
+                {
+                    id: document.getElementById('editID').value,
+                    username: document.getElementById('editName').value,
+                    lastname: document.getElementById('editLastname').value,
+                    age: document.getElementById('editAge').value,
+                    email: document.getElementById('editEmail').value,
+                    password: document.getElementById('editPassword').value,
+                    passwordConfirm: document.getElementById('editPasswordConfirm').value,
+                    roles: [document.getElementById('editRoles').value]
+                }
+            )
+        }).then(() => {
+        $('#editModal').modal('hide')
+        refreshData()
+    })
+}
 
 // Delete modal
 function deleteModal(id) {

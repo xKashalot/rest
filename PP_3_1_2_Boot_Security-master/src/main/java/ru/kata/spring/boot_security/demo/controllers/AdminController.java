@@ -27,11 +27,12 @@ public class AdminController {
         return userService.users();
     }
 
-    @PatchMapping("{id}")
-    public User update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+    @PutMapping("{id}")
+    public ResponseEntity<?> update(@RequestBody User user, @PathVariable("id") int id) {
         userService.update(id, user);
-        return user;
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
     @GetMapping("{id}")
     public User showById(@PathVariable("id") long id) {
