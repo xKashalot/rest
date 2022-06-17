@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -28,18 +29,12 @@ public class User implements UserDetails {
     private String passwordConfirm;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Set<Role> roles;
 
 
     public User() {
     }
-
-//    public User(String email, String password, Collection<? extends GrantedAuthority> rolesToAuthorities) {
-//        this.email = email;
-//        this.password = password;
-//        this.roles = (Set<Role>) rolesToAuthorities;
-//    }
-
 
     public Long getId() {
         return id;

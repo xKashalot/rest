@@ -9,6 +9,8 @@ import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("admin/users")
 public class AdminController {
@@ -20,16 +22,26 @@ public class AdminController {
         this.userService = userService;
     }
 
+    @GetMapping()
+    public List<User> showAllUser() {
+        return userService.users();
+    }
+
+    @PatchMapping("{id}")
+    public User update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+        userService.update(id, user);
+        return user;
+    }
+
+    @GetMapping("{id}")
+    public User showById(@PathVariable("id") long id) {
+        return userService.showUser(id);
+    }
+
     @DeleteMapping( "{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id) {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @PatchMapping("/update/{id}")
-    public User update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
-        userService.update(id, user);
-        return user;
     }
 
 }

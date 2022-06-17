@@ -1,4 +1,4 @@
-let requestUrl = 'http://localhost:8080/admin'
+let requestUrl = 'http://localhost:8080/admin/users'
 
 // Users table
 function refreshData() {
@@ -12,18 +12,18 @@ function refreshData() {
         $.each(users, function (key, object) {
             let roles = ''
             $.each(object.roles, function (k, o) {
-                roles += o.name = ' '
+                roles += o.role
             })
             tBody += ('<tr>');
             tBody += ('<td>' + object.id + '</td>');
-            tBody += ('<td>' + object.name + '</td>');
+            tBody += ('<td>' + object.username + '</td>');
             tBody += ('<td>' + object.lastname + '</td>');
             tBody += ('<td>' + object.age + '</td>');
             tBody += ('<td>' + object.email + '</td>');
             tBody += ('<td>' + roles.replaceAll('ROLE_', ' ') + '</td>');
-            tBody += ('<td><button type="button" onclick="editModal(' + object.id + ')" ' +
+            tBody += ('<td> <button type="button" onclick="editModal(' + object.id + ')" ' +
                 'class="btn btn-primary">Edit</button></td>');
-            tBody += ('<td><button type="button" onclick="deleteModal(' + object.id + ')" ' +
+            tBody += ('<td><button type="submit" onclick="deleteModal(' + object.id + ')" ' +
                 'class="btn btn-danger">Delete</button></td>');
             tBody += ('</tr>');
         });
@@ -31,7 +31,7 @@ function refreshData() {
     }
 }
 
-
+refreshData();
 
 // // Create new user
 // function createUser(user) {
@@ -66,32 +66,28 @@ function refreshData() {
 // }
 
 
-// // Delete modal
-// function deleteModal(id) {
-//     fetch(requestUrl + '/' + id)
-//         .then(response => response.json())
-//         .then(result => userFields(result))
-//
-//     function userFields(user) {
-//         $('#delID').val(user.id);
-//         $('#delName').val(user.username);
-//         $('#delLastname').val(user.lastname);
-//         $('#delAge').val(user.age);
-//         $('#delEmail').val(user.email);
-//         $('#delPassword').val(user.password);
-//         $('#delPasswordConfirm').val(user.passwordConfirm);
-//         $('#delete').attr('onclick', 'deleteUser(' + user.id + ')')
-//         $('#deleteModal').modal()
-//     }
-// }
-//
-// function deleteUser(id) {
-//     fetch(requestUrl + '/' + id, {
-//         method: 'DELETE'
-//     }).then(() => {
-//         $('#deleteModal').modal('hide')
-//         refreshData();
-//     })
-// }
+// Delete modal
+function deleteModal(id) {
+    fetch(requestUrl + '/' + id)
+        .then(response => response.json())
+        .then(result => userFields(result))
 
-refreshData();
+    function userFields(user) {
+        $('#delID').val(user.id);
+        $('#delName').val(user.username);
+        $('#delLastname').val(user.lastname);
+        $('#delAge').val(user.age);
+        $('#delEmail').val(user.email);
+        $('#delete').attr('onclick', 'deleteUser(' + user.id + ')')
+        $('#deleteModal').modal()
+    }
+}
+
+function deleteUser(id) {
+    fetch(requestUrl + '/' + id, {
+        method: 'DELETE'
+    }).then(() => {
+        $('#deleteModal').modal('hide')
+        refreshData();
+    })
+}
