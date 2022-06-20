@@ -1,18 +1,21 @@
 package ru.kata.spring.boot_security.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Collection;
 
+@Data
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long roleId;
 
     private String role;
 
@@ -20,42 +23,16 @@ public class Role implements GrantedAuthority {
     @JsonBackReference
     private Collection<User> users;
 
-
-    public Role(Long id, String role) {
-        this.id = id;
+    public Role(Long roleId, String role) {
+        this.roleId = roleId;
         this.role = role;
     }
 
-    public Role(Long id) {
-        this.id = id;
+    public Role(Long roleId) {
+        this.roleId = roleId;
     }
 
     public Role() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public Collection<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Collection<User> users) {
-        this.users = users;
     }
 
     @Override

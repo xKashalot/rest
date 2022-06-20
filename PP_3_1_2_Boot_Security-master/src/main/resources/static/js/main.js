@@ -15,15 +15,15 @@ function refreshData() {
                 roles += o.role
             })
             tBody += ('<tr>');
-            tBody += ('<td>' + object.id + '</td>');
+            tBody += ('<td>' + object.userId + '</td>');
             tBody += ('<td>' + object.username + '</td>');
             tBody += ('<td>' + object.lastname + '</td>');
             tBody += ('<td>' + object.age + '</td>');
             tBody += ('<td>' + object.email + '</td>');
             tBody += ('<td>' + roles.replaceAll('ROLE_', ' ') + '</td>');
-            tBody += ('<td> <button type="button" onclick="editModal(' + object.id + ')" ' +
+            tBody += ('<td> <button type="button" onclick="editModal(' + object.userId + ')" ' +
                 'class="btn btn-primary">Edit</button></td>');
-            tBody += ('<td><button type="submit" onclick="deleteModal(' + object.id + ')" ' +
+            tBody += ('<td><button type="submit" onclick="deleteModal(' + object.userId + ')" ' +
                 'class="btn btn-danger">Delete</button></td>');
             tBody += ('</tr>');
         });
@@ -33,12 +33,12 @@ function refreshData() {
 
 refreshData();
 
-// // Create new user
-// function createUser(user) {
-//     fetch(requestUrl)
-//         .then() //
-//
-// }
+// Create new user
+function createUser(user) {
+    fetch(requestUrl)
+        .then() //
+
+}
 
 
 // Edit modal
@@ -48,14 +48,14 @@ function editModal(id) {
         .then(result => userFields(result))
 
     function userFields(user) {
-        $('#editID').val(user.id);
+        $('#editID').val(user.userId);
         $('#editName').val(user.username);
         $('#editLastname').val(user.lastname);
         $('#editAge').val(user.age);
         $('#editEmail').val(user.email);
         $('#editPassword').val(user.password);
         $('#editPasswordConfirm').val(user.passwordConfirm);
-        $('#edit').attr('onclick', 'editUser(' + user.id + ')')
+        $('#edit').attr('onclick', 'editUser(' + user.userId + ')')
         $('#editModal').modal()
     }
 }
@@ -70,7 +70,7 @@ function editUser(id) {
             method: 'PUT',
             body: JSON.stringify(
                 {
-                    id: document.getElementById('editID').value,
+                    userId: document.getElementById('editID').value,
                     username: document.getElementById('editName').value,
                     lastname: document.getElementById('editLastname').value,
                     age: document.getElementById('editAge').value,
@@ -93,12 +93,12 @@ function deleteModal(id) {
         .then(result => userFields(result))
 
     function userFields(user) {
-        $('#delID').val(user.id);
+        $('#delID').val(user.userId);
         $('#delName').val(user.username);
         $('#delLastname').val(user.lastname);
         $('#delAge').val(user.age);
         $('#delEmail').val(user.email);
-        $('#delete').attr('onclick', 'deleteUser(' + user.id + ')')
+        $('#delete').attr('onclick', 'deleteUser(' + user.userId + ')')
         $('#deleteModal').modal()
     }
 }

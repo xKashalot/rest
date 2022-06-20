@@ -2,22 +2,18 @@ package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.kata.spring.boot_security.demo.dto.UserRoleDTO;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
-
 import javax.transaction.Transactional;
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -42,6 +38,34 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void setbCryptPasswordEncoder(@Lazy BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
+
+//    private UserRoleDTO convertUserToDto (User user){
+//        UserRoleDTO userRoleDTO = new UserRoleDTO();
+//        userRoleDTO.setUserId(user.getUserId());
+//        userRoleDTO.setRole(user.getRoles().stream().toString());
+//        userRoleDTO.setUsername(user.getUsername());
+//        userRoleDTO.setLastname(user.getLastname());
+//        userRoleDTO.setAge(user.getAge());
+//        userRoleDTO.setPassword(user.getPassword());
+//        userRoleDTO.setPasswordConfirm(user.getPasswordConfirm());
+//        userRoleDTO.setEmail(user.getEmail());
+//        return userRoleDTO;
+//    }
+
+    @Override
+    @Transactional
+    public void update(long id, User user) {
+        User updatedUser = showUser(id);
+        updatedUser.setUsername(user.getUsername());
+        updatedUser.setLastname(user.getLastname());
+        updatedUser.setEmail(user.getEmail());
+        updatedUser.setAge(user.getAge());
+        updatedUser.setRoles(user.getRoles());
+        updatedUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        updatedUser.setPasswordConfirm(bCryptPasswordEncoder.encode(user.getPasswordConfirm()));
+    }
+
+
 
     @Override
     public User showUser(long id) {
@@ -77,19 +101,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (userRepository.findById(id).isPresent()) {
             userRepository.deleteById(id);
         }
-    }
-
-    @Override
-    @Transactional
-    public void update(long id, User user) {
-        User updatedUser = showUser(id);
-        updatedUser.setUsername(user.getUsername());
-        updatedUser.setLastname(user.getLastname());
-        updatedUser.setEmail(user.getEmail());
-        updatedUser.setAge(user.getAge());
-        updatedUser.setRoles(user.getRoles());
-        updatedUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        updatedUser.setPasswordConfirm(bCryptPasswordEncoder.encode(user.getPasswordConfirm()));
     }
 
     @Override
