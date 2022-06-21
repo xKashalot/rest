@@ -28,7 +28,7 @@ public class MainController {
 
     @GetMapping("/admin")
     public String usersPage(Model model, @AuthenticationPrincipal User user) {
-        List<User> users = userService.users();
+        Collection<User> users = userService.users();
         Collection<Role> listRoles = userService.getRoles();
         model.addAttribute("users", users);
         model.addAttribute("roles", listRoles);

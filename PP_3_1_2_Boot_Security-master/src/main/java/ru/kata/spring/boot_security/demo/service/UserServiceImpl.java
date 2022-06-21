@@ -12,6 +12,7 @@ import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
+
 import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    private UserRoleDTO convertUserToDto (User user){
+    private UserRoleDTO convertUserToDto(User user) {
         UserRoleDTO userRoleDTO = new UserRoleDTO();
         userRoleDTO.setUserId(user.getUserId());
         userRoleDTO.setRoles(user.getRoles());
@@ -71,7 +72,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public List<User> users() {
+    public Collection<User> users() {
         return userRepository.findAll();
     }
 
@@ -101,8 +102,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Set<Role> getRoles() {
-        return new HashSet<>(roleRepository.findAll());
+    public Collection<Role> getRoles() {
+        return roleRepository.findAll();
+
     }
 
     @Override
