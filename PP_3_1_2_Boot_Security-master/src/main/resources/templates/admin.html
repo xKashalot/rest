@@ -78,47 +78,48 @@
                             <div class="form-group text-center">
                                 <form th:method="POST" th:action="@{/registration}" th:object="${newUser}">
                                     <div class="form-group p-2">
-                                        <label for="username"> <span class="fw-bold">First name </span> </label>
+                                        <label for="username"> <span class="fw-bold">User name</span> </label>
                                         <br/>
-                                        <input class="bg-warning" type="text" th:field="*{username}" id="username"/>
+                                        <input class="bg-warning" type="text" id="username"/>
                                         <br/></div>
                                     <div class="form-group p-2">
                                         <label for="lastname"> <span class="fw-bold">Last name</span> </label>
                                         <br/>
-                                        <input class="bg-warning" type="text" th:field="*{lastname}" id="lastname"/>
+                                        <input class="bg-warning" type="text" id="lastname"/>
                                         <br/></div>
                                     <div class="form-group p-2">
                                         <label for="age"> <span class="fw-bold">Age </span></label>
                                         <br/>
-                                        <input type="text" th:field="*{age}" id="age"/>
+                                        <input type="text" id="age"/>
                                         <br/></div>
                                     <div class="form-group p-2">
                                         <label for="email"><span class="fw-bold"> Email </span></label>
                                         <br/>
-                                        <input class="bg-warning" type="text" th:field="*{email}" id="email"/>
+                                        <input class="bg-warning" type="text" id="email"/>
                                         <br/></div>
                                     <div class="form-group p-2">
                                         <label for="password"><span class="fw-bold"> Password </span></label>
                                         <br/>
-                                        <input type="password" th:field="*{password}" id="password"/>
+                                        <input type="password" id="password"/>
                                         <br/></div>
                                     <div class="form-group p-2">
                                         <label for="passwordConfirm"><span
                                                 class="fw-bold"> Confirm Password </span></label>
                                         <br/>
-                                        <input type="password" th:field="*{passwordConfirm}" id="passwordConfirm"/>
+                                        <input type="password" id="passwordConfirm"/>
                                         <br/></div>
                                     <div class="col-2 mx-auto">
                                         <div class="form-group p-2">
                                             <label for="roles"> <span class="fw-bold"> Role </span></label>
-                                            <select multiple class="form-control" id="roles" name="roles" size="2">
+                                            <select multiple class="form-control" id="roles" name="roles" size="3">
                                                 <option value="1">ADMIN</option>
                                                 <option value="2" selected>USER</option>
+                                                <option value="3">TEST</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col text-center">
-                                        <button type="submit" class="btn btn-success"> Add new user</button>
+                                        <button type="submit" class="btn btn-success" onclick="" id="addNew"> Add new user</button>
                                     </div>
                                 </form>
                             </div>
@@ -175,7 +176,7 @@
                                         <div class="form-group p-2 text-center">
                                             <label for="editRoles"> <span class="fw-bold"> Role </span></label>
                                             <select multiple class="form-control" id="editRoles" name="roles"
-                                                    size="2">
+                                                    size="3">
                                                 <option value="1">ADMIN</option>
                                                 <option value="2">USER</option>
                                                 <option value="3">TEST</option>
@@ -228,7 +229,7 @@
                                             </div>
                                             <div class="form-group p-2 text-center">
                                                 <label for="delRoles"> <span class="fw-bold"> Role </span></label>
-                                                <select multiple class="form-select" id="delRoles" size="2">
+                                                <select multiple class="form-select" id="delRoles" size="3">
                                                     <option value="1">ADMIN</option>
                                                     <option value="2">USER</option>
                                                     <option value="3">TEST</option>

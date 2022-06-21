@@ -31,14 +31,33 @@ function refreshData() {
     }
 }
 
-refreshData();
-
 // Create new user
-function createUser(user) {
-    fetch(requestUrl)
-        .then() //
+function createUser() {
+    fetch(requestUrl,
+        {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(
+                {
+                    username: $('#username').val(),
+                    lastname: $('#lastname').val(),
+                    age: $('#age').val(),
+                    email: $('#email').val(),
+                    password: $('#password').val(),
+                    passwordConfirm: $('#passwordConfirm').val(),
+                    roles: [document.getElementById('roles').value]
+                }
+            )
+        }).then(() => {
+
+            refreshData()
+        })
 
 }
+
 
 
 // Edit modal
@@ -53,6 +72,7 @@ function editModal(id) {
         $('#editLastname').val(user.lastname);
         $('#editAge').val(user.age);
         $('#editEmail').val(user.email);
+        $('#editRoles').val(user.roles);
         $('#edit').attr('onclick', 'updateUser(' + user.userId + ')')
         $('#editModal').modal()
     }
@@ -108,3 +128,4 @@ function deleteUser(id) {
     })
 }
 
+refreshData();
