@@ -9,10 +9,7 @@ public class UserRoleDTO {
     private Long userId;
     private String username;
     private String lastname;
-//    private Set<Role> roles;
-    private String role;
+    private Set<Role> roles;
     private Long age;
     private String email;
-    private String password;
-    private String passwordConfirm;
 }

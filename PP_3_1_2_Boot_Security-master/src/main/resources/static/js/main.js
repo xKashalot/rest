@@ -53,8 +53,6 @@ function editModal(id) {
         $('#editLastname').val(user.lastname);
         $('#editAge').val(user.age);
         $('#editEmail').val(user.email);
-        $('#editPassword').val(user.password);
-        $('#editPasswordConfirm').val(user.passwordConfirm);
         $('#edit').attr('onclick', 'editUser(' + user.userId + ')')
         $('#editModal').modal()
     }
@@ -75,8 +73,6 @@ function editUser(id) {
                     lastname: document.getElementById('editLastname').value,
                     age: document.getElementById('editAge').value,
                     email: document.getElementById('editEmail').value,
-                    password: document.getElementById('editPassword').value,
-                    passwordConfirm: document.getElementById('editPasswordConfirm').value,
                     roles: [document.getElementById('editRoles').value]
                 }
             )

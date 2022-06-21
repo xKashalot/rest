@@ -14,6 +14,7 @@ import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -39,32 +40,28 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-//    private UserRoleDTO convertUserToDto (User user){
-//        UserRoleDTO userRoleDTO = new UserRoleDTO();
-//        userRoleDTO.setUserId(user.getUserId());
-//        userRoleDTO.setRole(user.getRoles().stream().toString());
-//        userRoleDTO.setUsername(user.getUsername());
-//        userRoleDTO.setLastname(user.getLastname());
-//        userRoleDTO.setAge(user.getAge());
-//        userRoleDTO.setPassword(user.getPassword());
-//        userRoleDTO.setPasswordConfirm(user.getPasswordConfirm());
-//        userRoleDTO.setEmail(user.getEmail());
-//        return userRoleDTO;
-//    }
+    private UserRoleDTO convertUserToDto (User user){
+        UserRoleDTO userRoleDTO = new UserRoleDTO();
+        userRoleDTO.setUserId(user.getUserId());
+        userRoleDTO.setRoles((Set<Role>) user.getRoles());
+        userRoleDTO.setUsername(user.getUsername());
+        userRoleDTO.setLastname(user.getLastname());
+        userRoleDTO.setAge(user.getAge());
+        userRoleDTO.setEmail(user.getEmail());
+        return userRoleDTO;
+    }
 
-    @Override
+
     @Transactional
-    public void update(long id, User user) {
+    @Override
+    public void update(long id, UserRoleDTO user) {
         User updatedUser = showUser(id);
         updatedUser.setUsername(user.getUsername());
         updatedUser.setLastname(user.getLastname());
         updatedUser.setEmail(user.getEmail());
         updatedUser.setAge(user.getAge());
         updatedUser.setRoles(user.getRoles());
-        updatedUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        updatedUser.setPasswordConfirm(bCryptPasswordEncoder.encode(user.getPasswordConfirm()));
     }
-
 
 
     @Override
@@ -90,7 +87,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         if (user.getRoles() == null) {
-            user.setRoles(Collections.singleton(roleRepository.getById(2L)));
+            user.setRoles(roleRepository.findByRole("ROLE_USER"));
         }
         userRepository.save(user);
         return true;

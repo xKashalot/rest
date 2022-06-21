@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
+import ru.kata.spring.boot_security.demo.dto.UserRoleDTO;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import java.util.List;
@@ -10,6 +11,6 @@ public interface UserService {
     List<User> users();
     boolean save(User user);
     void delete(long id);
-    void update(long id, User user);
+    void update(long id, UserRoleDTO user);
     Set<Role> getRoles();
 }

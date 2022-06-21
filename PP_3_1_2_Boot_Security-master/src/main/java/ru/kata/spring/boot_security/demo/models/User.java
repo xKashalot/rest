@@ -32,7 +32,7 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JsonManagedReference
-    private Set<Role> roles;
+    private Collection<Role> roles;
 
     public User() {
     }
