@@ -53,12 +53,12 @@ function editModal(id) {
         $('#editLastname').val(user.lastname);
         $('#editAge').val(user.age);
         $('#editEmail').val(user.email);
-        $('#edit').attr('onclick', 'editUser(' + user.userId + ')')
+        $('#edit').attr('onclick', 'updateUser(' + user.userId + ')')
         $('#editModal').modal()
     }
 }
 
-function editUser(id) {
+function updateUser(id) {
     fetch(requestUrl + '/' + id,
         {
             headers: {
