@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private UserRoleDTO convertUserToDto (User user){
         UserRoleDTO userRoleDTO = new UserRoleDTO();
         userRoleDTO.setUserId(user.getUserId());
-        userRoleDTO.setRoles((Set<Role>) user.getRoles());
+        userRoleDTO.setRoles(user.getRoles());
         userRoleDTO.setUsername(user.getUsername());
         userRoleDTO.setLastname(user.getLastname());
         userRoleDTO.setAge(user.getAge());
