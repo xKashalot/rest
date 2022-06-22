@@ -51,11 +51,12 @@ function createUser() {
                     roles: [document.getElementById('roles').value]
                 }
             )
-        }).then(() => {
-
+        }).then((r) => {
+        if (r.ok) {
+            $('#users').tab('show')
             refreshData()
-        })
-
+        }
+    })
 }
 
 
