@@ -13,7 +13,7 @@ public class UserRoleDTO {
     private Long userId;
     private String username;
     private String lastname;
-    private List<Role> role;
     private Long age;
     private String email;
+    private List<Long> roleId;
 }

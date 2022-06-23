@@ -14,6 +14,7 @@ import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 import javax.transaction.Transactional;
+import java.io.Console;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -44,13 +45,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private UserRoleDTO convertUserToDto(User user) {
         UserRoleDTO userRoleDTO = new UserRoleDTO();
         userRoleDTO.setUserId(user.getUserId());
-        userRoleDTO.setRole(user.getRoles());
         userRoleDTO.setUsername(user.getUsername());
         userRoleDTO.setLastname(user.getLastname());
         userRoleDTO.setAge(user.getAge());
         userRoleDTO.setEmail(user.getEmail());
+        userRoleDTO.setRoleId(user.getRoles().stream().map(Role::getRoleId).toList());
         return userRoleDTO;
     }
+
+
 
 
     @Transactional
@@ -61,7 +64,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         updatedUser.setLastname(user.getLastname());
         updatedUser.setEmail(user.getEmail());
         updatedUser.setAge(user.getAge());
-        updatedUser.setRoles(user.getRole());
+        updatedUser.setRoles(roleRepository.findRolesByRoleIdIn(user.getRoleId()));
+        System.out.println("--------------------------");
+        System.out.println(updatedUser.toString());
+        System.out.println("__________________________");
     }
 
 
