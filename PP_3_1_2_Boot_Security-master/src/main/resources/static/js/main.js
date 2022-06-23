@@ -48,6 +48,7 @@ function createUser() {
                     email: $('#email').val(),
                     password: $('#password').val(),
                     passwordConfirm: $('#passwordConfirm').val(),
+                    // roles: [$('roles').val()]
                     roles: [document.getElementById('roles').value]
                 }
             )
