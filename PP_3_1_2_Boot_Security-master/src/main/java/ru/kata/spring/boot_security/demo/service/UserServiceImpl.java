@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private UserRoleDTO convertUserToDto(User user) {
         UserRoleDTO userRoleDTO = new UserRoleDTO();
         userRoleDTO.setUserId(user.getUserId());
-        userRoleDTO.setRoles((List<Role>) user.getRoles());
+        userRoleDTO.setRole(user.getRoles());
         userRoleDTO.setUsername(user.getUsername());
         userRoleDTO.setLastname(user.getLastname());
         userRoleDTO.setAge(user.getAge());
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         updatedUser.setLastname(user.getLastname());
         updatedUser.setEmail(user.getEmail());
         updatedUser.setAge(user.getAge());
-        updatedUser.setRoles(user.getRoles());
+        updatedUser.setRoles(user.getRole());
     }
 
 
@@ -102,9 +102,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Collection<Role> getRoles() {
+    public List<Role> getRoles() {
         return roleRepository.findAll();
-
     }
 
     @Override

@@ -1,16 +1,19 @@
 package ru.kata.spring.boot_security.demo.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
@@ -32,12 +35,10 @@ public class User implements UserDetails {
     private String passwordConfirm;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonManagedReference
-    @JsonIgnore
-    private Collection<Role> roles;
-
-    public User() {
-    }
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "users_user_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_role_id"))
+    private List<Role> roles;
 
     @Override
     public String getUsername() {

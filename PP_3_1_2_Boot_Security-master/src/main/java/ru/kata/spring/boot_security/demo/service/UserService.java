@@ -14,5 +14,5 @@ public interface UserService {
     boolean save(User user);
     void delete(long id);
     void update(long id, UserRoleDTO user);
-    Collection<Role> getRoles();
+    List<Role> getRoles();
 }
