@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRoleDTO.setLastname(user.getLastname());
         userRoleDTO.setAge(user.getAge());
         userRoleDTO.setEmail(user.getEmail());
-        userRoleDTO.setRoleId(user.getRoles().stream().map(Role::getRoleId).toList());
+        userRoleDTO.setRoleIds(user.getRoles().stream().map(Role::getRoleId).toList());
         return userRoleDTO;
     }
 
@@ -59,12 +59,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     @Override
     public void update(long id, UserRoleDTO user) {
+        System.out.println(user.getRoleIds());
         User updatedUser = showUser(id);
         updatedUser.setUsername(user.getUsername());
         updatedUser.setLastname(user.getLastname());
         updatedUser.setEmail(user.getEmail());
         updatedUser.setAge(user.getAge());
-        updatedUser.setRoles(roleRepository.findRolesByRoleIdIn(user.getRoleId()));
+        updatedUser.setRoles(roleRepository.findRolesByRoleIdIn(user.getRoleIds()));
         System.out.println("--------------------------");
         System.out.println(updatedUser.toString());
         System.out.println("__________________________");

@@ -74,7 +74,7 @@ function editModal(id) {
         $('#editLastname').val(user.lastname);
         $('#editAge').val(user.age);
         $('#editEmail').val(user.email);
-        $('#editRoles').val(user.roles);
+        $('#editRoles').val(user.roleIds);
         $('#edit').attr('onclick', 'updateUser(' + user.userId + ')')
         $('#editModal').modal()
     }
@@ -95,7 +95,7 @@ function updateUser(id) {
                     lastname: document.getElementById('editLastname').value,
                     age: document.getElementById('editAge').value,
                     email: document.getElementById('editEmail').value,
-                    roles: [document.getElementById('editRoles').value]
+                    roleIds: [document.getElementById('editRoles').value]
                 }
             )
         }).then(() => {
