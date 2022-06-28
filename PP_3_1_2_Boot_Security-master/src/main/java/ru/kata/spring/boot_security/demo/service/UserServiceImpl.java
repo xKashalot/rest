@@ -57,21 +57,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     @Override
     public void update(long id, UserRoleDTO user) {
-        System.out.println("--------------------------");
-        System.out.println(user.getRoleIds().toString() + "user из формы с массивом ролей");
-        System.out.println("--------------------------");
         User updatedUser = showUser(id);
-        updatedUser.setRoles(roleRepository.findRolesByRoleIdIn(user.getRoleIds()));
-        System.out.println("--------------------------");
-        System.out.println(updatedUser.getRoles().toString() + "user после установки новой роли");
-        System.out.println("__________________________");
         updatedUser.setUsername(user.getUsername());
         updatedUser.setLastname(user.getLastname());
         updatedUser.setEmail(user.getEmail());
         updatedUser.setAge(user.getAge());
-        System.out.println("--------------------------");
-        System.out.println(updatedUser.toString());
-        System.out.println("__________________________");
+        updatedUser.setRoles(roleRepository.findRolesByRoleIdIn(user.getRoleIds()));
     }
 
 
