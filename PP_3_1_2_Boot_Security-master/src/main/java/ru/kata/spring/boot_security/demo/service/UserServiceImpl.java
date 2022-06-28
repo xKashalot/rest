@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void update(long id, UserRoleDTO user) {
         System.out.println(user.getRoleIds().toString() + "user из формы с массивом ролей");
         User updatedUser = showUser(id);
-        updatedUser.setRoles(roleRepository.findRolesByRoleIdIn(user.getRoleIds().stream().toList()));
+        updatedUser.setRoles(roleRepository.findRolesByRoleIdIn(user.getRoleIds()));
         System.out.println(updatedUser.getRoles().toString() + "user после установки новой роли");
         updatedUser.setUsername(user.getUsername());
         updatedUser.setLastname(user.getLastname());

@@ -38,7 +38,7 @@ public class User implements UserDetails {
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "users_user_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_role_id"))
-    private List<Role> roles;
+    private Set<Role> roles;
 
     @Override
     public String getUsername() {
