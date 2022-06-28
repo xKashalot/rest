@@ -48,18 +48,17 @@ function createUser() {
                     email: $('#email').val(),
                     password: $('#password').val(),
                     passwordConfirm: $('#passwordConfirm').val(),
-                    // roles: [$('roles').val()]
                     roles: [document.getElementById('roles').value]
                 }
             )
         }).then((r) => {
         if (r.ok) {
-            $('#users').tab('show')
-            refreshData()
+            $('#users').tab('show');
+            refreshData();
         }
     })
+    refreshData();
 }
-
 
 // Edit modal
 function editModal(id) {
