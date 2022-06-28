@@ -43,6 +43,11 @@ public class MainController {
         return "login";
     }
 
+    @GetMapping("/")
+    public String main() {
+        return "redirect:/login";
+    }
+
     @GetMapping("/logout")
     public String logout() {
         return "login";
