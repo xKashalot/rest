@@ -103,6 +103,7 @@ function updateUser(id) {
         refreshData();
     })
 }
+refreshData();
 
 // Delete modal
 function deleteModal(id) {
