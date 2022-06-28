@@ -57,7 +57,6 @@ function createUser() {
             refreshData();
         }
     })
-    refreshData();
 }
 
 // Edit modal
