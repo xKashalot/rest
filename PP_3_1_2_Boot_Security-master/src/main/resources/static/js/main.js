@@ -75,8 +75,8 @@ function editModal(id) {
         $('#editAge').val(user.age);
         $('#editEmail').val(user.email);
         $('#editRoles').val(user.roleIds);
-        $('#edit').attr('onclick', 'updateUser(' + user.userId + ')')
-        $('#editModal').modal()
+        $('#edit').attr('onclick', 'updateUser(' + user.userId + ')');
+        $('#editModal').modal();
     }
 }
 
@@ -99,8 +99,8 @@ function updateUser(id) {
                 }
             )
         }).then(() => {
-        $('#editModal').modal('hide')
-        refreshData()
+        $('#editModal').modal('hide');
+        refreshData();
     })
 }
 
@@ -116,8 +116,8 @@ function deleteModal(id) {
         $('#delLastname').val(user.lastname);
         $('#delAge').val(user.age);
         $('#delEmail').val(user.email);
-        $('#delete').attr('onclick', 'deleteUser(' + user.userId + ')')
-        $('#deleteModal').modal()
+        $('#delete').attr('onclick', 'deleteUser(' + user.userId + ')');
+        $('#deleteModal').modal();
     }
 }
 
@@ -125,7 +125,7 @@ function deleteUser(id) {
     fetch(requestUrl + '/' + id, {
         method: 'DELETE'
     }).then(() => {
-        $('#deleteModal').modal('hide')
+        $('#deleteModal').modal('hide');
         refreshData();
     })
 }
