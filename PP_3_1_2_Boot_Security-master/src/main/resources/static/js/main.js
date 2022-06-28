@@ -61,7 +61,6 @@ function createUser() {
 }
 
 
-
 // Edit modal
 function editModal(id) {
     fetch(requestUrl + '/' + id)
@@ -103,6 +102,7 @@ function updateUser(id) {
         refreshData();
     })
 }
+
 refreshData();
 
 // Delete modal

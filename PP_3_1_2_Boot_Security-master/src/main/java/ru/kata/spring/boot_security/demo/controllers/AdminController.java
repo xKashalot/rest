@@ -46,17 +46,10 @@ public class AdminController {
 
     @GetMapping("{id}")
     public User showById(@PathVariable("id") long id) {
-//        User user = userService.showUser(id);
-//        System.out.println(user.getEmail());
-//        System.out.println(user.getRoles().stream().map(Role::getRoleId).toList());
-//        System.out.println("--------------------------");
-//        UserRoleDTO user2 = userService.convertUserToDto(user);
-//        System.out.println(user2.getEmail());
-//        System.out.println(user2.getRoleIds());
         return userService.showUser(id);
     }
 
-    @DeleteMapping( "{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id) {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
