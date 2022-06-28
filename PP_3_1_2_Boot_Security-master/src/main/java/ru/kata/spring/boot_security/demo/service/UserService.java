@@ -10,9 +10,14 @@ import java.util.Set;
 
 public interface UserService {
     User showUser(long id);
+
     Collection<User> users();
+
     boolean save(User user);
+
     void delete(long id);
+
     void update(long id, UserRoleDTO user);
+
     List<Role> getRoles();
 }

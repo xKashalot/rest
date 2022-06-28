@@ -60,7 +60,7 @@
                             <th th:utext="${user.getLastname()}"/>
                             <th th:utext="${user.getAge()}"/>
                             <th th:utext="${user.getEmail()}"/>
-                            <th> <span th:each="role : ${user.roles}" th:text="${role.toString() + ' '}"/> </th>
+                            <th><span th:each="role : ${user.roles}" th:text="${role.toString() + ' '}"/></th>
                         </tr>
                         </tbody>
                     </table>
