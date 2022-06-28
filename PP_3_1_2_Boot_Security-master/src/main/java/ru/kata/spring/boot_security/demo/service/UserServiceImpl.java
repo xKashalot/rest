@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRoleDTO.setLastname(user.getLastname());
         userRoleDTO.setAge(user.getAge());
         userRoleDTO.setEmail(user.getEmail());
-        userRoleDTO.setRoleIds(user.getRoles().stream().map(Role::getRoleId).toList());
+        userRoleDTO.setRoleIds(user.getRoles().stream().map(Role::getRoleId).collect(Collectors.toSet()));
         return userRoleDTO;
     }
 
@@ -57,12 +57,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     @Override
     public void update(long id, UserRoleDTO user) {
+        System.out.println(user.getRoleIds().toString() + "user из формы с массивом ролей");
         User updatedUser = showUser(id);
+        updatedUser.setRoles(roleRepository.findRolesByRoleIdIn(user.getRoleIds().stream().toList()));
+        System.out.println(updatedUser.getRoles().toString() + "user после установки новой роли");
         updatedUser.setUsername(user.getUsername());
         updatedUser.setLastname(user.getLastname());
         updatedUser.setEmail(user.getEmail());
         updatedUser.setAge(user.getAge());
-        updatedUser.setRoles(roleRepository.findRolesByRoleIdIn(user.getRoleIds()));
     }
 
 

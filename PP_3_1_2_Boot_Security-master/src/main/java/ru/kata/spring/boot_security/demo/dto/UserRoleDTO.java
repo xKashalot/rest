@@ -3,6 +3,7 @@ package ru.kata.spring.boot_security.demo.dto;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -12,5 +13,5 @@ public class UserRoleDTO {
     private String lastname;
     private Long age;
     private String email;
-    private List<Long> roleIds;
+    private Set<Long> roleIds;
 }
