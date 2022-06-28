@@ -48,7 +48,7 @@ function createUser() {
                     email: $('#email').val(),
                     password: $('#password').val(),
                     passwordConfirm: $('#passwordConfirm').val(),
-                    roles: [document.getElementById('roles').value]
+                    roles: $('#roles').val()
                 }
             )
         }).then((r) => {
@@ -71,7 +71,6 @@ function editModal(id) {
         $('#editLastname').val(user.lastname);
         $('#editAge').val(user.age);
         $('#editEmail').val(user.email);
-        $('#editRoles').val(user.roleIds);
         $('#edit').attr('onclick', 'updateUser(' + user.userId + ')');
         $('#editModal').modal();
     }
@@ -92,7 +91,8 @@ function updateUser(id) {
                     lastname: document.getElementById('editLastname').value,
                     age: document.getElementById('editAge').value,
                     email: document.getElementById('editEmail').value,
-                    roleIds: [document.getElementById('editRoles').value]
+                    // roleIds: [document.getElementById('editRoles').value]
+                    roleIds: $('#editRoles').val()
                 }
             )
         }).then(() => {

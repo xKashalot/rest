@@ -2,9 +2,7 @@ package ru.kata.spring.boot_security.demo.dto;
 
 import lombok.Data;
 
-import java.util.List;
 import java.util.Set;
-
 
 @Data
 public class UserRoleDTO {

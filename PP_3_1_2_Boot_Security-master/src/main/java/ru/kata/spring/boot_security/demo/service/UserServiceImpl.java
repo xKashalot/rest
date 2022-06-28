@@ -14,7 +14,6 @@ import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 import javax.transaction.Transactional;
-import java.io.Console;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -42,7 +41,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public UserRoleDTO convertUserToDto(User user) {
+    private UserRoleDTO convertUserToDto(User user) {
         UserRoleDTO userRoleDTO = new UserRoleDTO();
         userRoleDTO.setUserId(user.getUserId());
         userRoleDTO.setUsername(user.getUsername());
@@ -57,14 +56,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     @Override
     public void update(long id, UserRoleDTO user) {
-        System.out.println(user.getRoleIds().toString() + "user из формы с массивом ролей");
         User updatedUser = showUser(id);
-        updatedUser.setRoles(roleRepository.findRolesByRoleIdIn(user.getRoleIds()));
-        System.out.println(updatedUser.getRoles().toString() + "user после установки новой роли");
         updatedUser.setUsername(user.getUsername());
         updatedUser.setLastname(user.getLastname());
         updatedUser.setEmail(user.getEmail());
         updatedUser.setAge(user.getAge());
+        updatedUser.setRoles(roleRepository.findRolesByRoleIdIn(user.getRoleIds()));
     }
 
 
